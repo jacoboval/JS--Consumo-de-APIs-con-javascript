@@ -14,14 +14,14 @@
             <h1>Conociendo el clima de tu ciudad</h1>
             <div class="input-group">
                 <div class="input-field">
-                    <label for="latitude">Latitud:</label>
+                    <label for="latitude">Latitud:19.66658</label>
                     <input type="number" id="latitude" step="0.000001" placeholder="Indica la latitud (ej. 40.7128)">
                 </div>
                 <div class="input-field">
-                    <label for="longitude">Longitud:</label>
+                    <label for="longitude">Longitud:-99.09477</label>
                     <input type="number" id="longitude" step="0.000001" placeholder="Indica la longitud (ej. -74.0060)">
                 </div>
-                <button type="button" id="getWeather">Consultar el clima</button>
+                <button type="button" id="getWeather" onclick="getDatosClima();">Consultar el clima</button>
             </div>
             <div id="weatherData" class="weather-data hidden">
                 <h2>Información del clima</h2>
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>

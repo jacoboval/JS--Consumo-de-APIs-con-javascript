@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador de Repositorios GitHub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Explorador de Repositorios GitHub</h1>
+        <p>Busca y gestiona repositorios en GitHub</p>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Ingresa un nombre de usuario o repositorio">
+            <button id="searchButton" onclick="buscarRepositorios();">Buscar</button>
+            <!--
+            <button id="autoRefreshBtn" class="refresh-btn">Activar actualización automática</button>
+            <span id="refreshCounter" class="refresh-counter"></span>
+            -->
+        </div>
+
+        <div id="errorMessage" class="error"></div>
+        <div id="successMessage" class="success"></div>
+        <div id="loading" class="loading">Cargando repositorios...</div>
+        <div id="typingIndicator" class="typing-indicator"></div>
+
+        <!--
+        <div class="event-loop-demo">
+            <h3>Demostración del Event Loop</h3>
+            <div class="demo-buttons">
+                <button id="demoTimeoutBtn">Demo setTimeout</button>
+                <button id="demoIntervalBtn">Demo setInterval</button>
+                <button id="demoCancelBtn">Demo Cancelación</button>
+            </div>
+            <div id="demoOutput" class="demo-output"></div>
+        </div>
+
+        <div class="actions-container">
+            <h3>Acciones de GitHub</h3>
+            <div class="action-buttons">
+                <button id="createRepoBtn">Crear Repositorio</button>
+                <button id="addFileBtn">Agregar Archivo</button>
+                <button id="deleteFileBtn">Eliminar Archivo</button>
+            </div>
+
+            <div id="createRepoForm" class="action-form">
+                <div class="form-group">
+                    <label for="newRepoName">Nombre del Repositorio:</label>
+                    <input type="text" id="newRepoName" placeholder="mi-nuevo-repo">
+                </div>
+                <div class="form-group">
+                    <label for="newRepoDesc">Descripción:</label>
+                    <textarea id="newRepoDesc" placeholder="Descripción del repositorio"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newRepoPrivate">Privacidad:</label>
+                    <select id="newRepoPrivate">
+                        <option value="false">Público</option>
+                        <option value="true">Privado</option>
+                    </select>
+                </div>
+                <button id="submitCreateRepo">Crear Repositorio</button>
+            </div>
+
+            <div id="addFileForm" class="action-form">
+                <div class="form-group">
+                    <label for="fileRepoOwner">Propietario del Repositorio:</label>
+                    <input type="text" id="fileRepoOwner" placeholder="nombre-usuario">
+                </div>
+                <div class="form-group">
+                    <label for="fileRepoName">Nombre del Repositorio:</label>
+                    <input type="text" id="fileRepoName" placeholder="nombre-repo">
+                </div>
+                <div class="form-group">
+                    <label for="filePath">Ruta del Archivo:</label>
+                    <input type="text" id="filePath" placeholder="README.md">
+                </div>
+                <div class="form-group">
+                    <label for="fileContent">Contenido:</label>
+                    <textarea id="fileContent" placeholder="# Mi Repositorio" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fileCommitMsg">Mensaje de Commit:</label>
+                    <input type="text" id="fileCommitMsg" placeholder="Agregar archivo">
+                </div>
+                <button id="submitAddFile">Agregar Archivo</button>
+            </div>
+
+            <div id="deleteFileForm" class="action-form">
+                <div class="form-group">
+                    <label for="delRepoOwner">Propietario del Repositorio:</label>
+                    <input type="text" id="delRepoOwner" placeholder="nombre-usuario">
+                </div>
+                <div class="form-group">
+                    <label for="delRepoName">Nombre del Repositorio:</label>
+                    <input type="text" id="delRepoName" placeholder="nombre-repo">
+                </div>
+                <div class="form-group">
+                    <label for="delFilePath">Ruta del Archivo:</label>
+                    <input type="text" id="delFilePath" placeholder="README.md">
+                </div>
+                <div class="form-group">
+                    <label for="delCommitMsg">Mensaje de Commit:</label>
+                    <input type="text" id="delCommitMsg" placeholder="Eliminar archivo">
+                </div>
+                <button id="submitDeleteFile">Eliminar Archivo</button>
+            </div>
+        </div>
+        -->
+
+        <div id="reposContainer" class="repos-container"></div>
+    </div>
+
+    <!-- Modal para confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Confirmar acción</h3>
+            <p id="confirmMessage"></p>
+            <div class="action-buttons">
+                <button id="confirmYes">Sí, continuar</button>
+                <button id="confirmNo" class="delete-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+<script src="/02-ApiGitHub/js/script.js"></script>
+    
+</body>
+
+</html>

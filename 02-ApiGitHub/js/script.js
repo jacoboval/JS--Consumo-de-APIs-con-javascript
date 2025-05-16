@@ -34,9 +34,31 @@ function mostarRepositorios(repos){
     reposContainer.innerHTML = '';
 
     repos.forEach(repo => {
-        reposContainer.innerHTML += `<div>${repo.name}</div>`;
-       
+        
+        const repoCard = document.createElement('div');
+        repoCard.className = "repo-card";
+        
+        repoCard.innerHTML  =`
+            <div class="repo-name">
+                <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+            </div>
+            <div class="repo-description">
+                ${repo.description || 'Sin descripción'}
+            </div>
+            <div class="repo-stats">
+                <div class="repo-stat">
+                    <span>⭐</span> ${repo.stargazers_count}
+                </div>
+                <div class="repo-stat">
+                    <span>🍴</span> ${repo.forks_count}
+                </div>
+                <div class="repo-stat">
+                    ${repo.language || 'N/A'}
+                </div>
+            </div>
 
+        `;
+        reposContainer.appendChild(repoCard);
     });   
 }
 

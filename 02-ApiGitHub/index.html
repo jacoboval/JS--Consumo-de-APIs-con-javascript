@@ -42,33 +42,44 @@
             <div id="demoOutput" class="demo-output"></div>
         </div>
 
+    -->
+
         <div class="actions-container">
             <h3>Acciones de GitHub</h3>
             <div class="action-buttons">
-                <button id="createRepoBtn">Crear Repositorio</button>
+                <button id="createRepoBtn" type="button"onclick="abrirModal('createRepoForm');">Crear Repositorio</button>
+               <!-- 
                 <button id="addFileBtn">Agregar Archivo</button>
                 <button id="deleteFileBtn">Eliminar Archivo</button>
+            -->
             </div>
 
-            <div id="createRepoForm" class="action-form">
-                <div class="form-group">
-                    <label for="newRepoName">Nombre del Repositorio:</label>
-                    <input type="text" id="newRepoName" placeholder="mi-nuevo-repo">
+           <div id="createRepoForm" class="action-form modal">
+                <div class="modal-content">   
+                    <div>
+                        <span class="close" onclick="cerrarModal('createRepoForm')">&times;</span>
+                        <div class="form-group">
+                            <label for="newRepoName">Nombre del Repositorio:</label>
+                            <input type="text" id="newRepoName" placeholder="mi-nuevo-repo">
+                        </div>
+                        <div class="form-group">
+                            <label for="newRepoDesc">Descripción:</label>
+                            <textarea id="newRepoDesc" placeholder="Descripción del repositorio"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newRepoPrivate">Privacidad:</label>
+                            <select id="newRepoPrivate">
+                                <option value="false">Público</option>
+                                <option value="true">Privado</option>
+                            </select>
+                        </div>
+                        <button id="submitCreateRepo">Crear Repositorio</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="newRepoDesc">Descripción:</label>
-                    <textarea id="newRepoDesc" placeholder="Descripción del repositorio"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="newRepoPrivate">Privacidad:</label>
-                    <select id="newRepoPrivate">
-                        <option value="false">Público</option>
-                        <option value="true">Privado</option>
-                    </select>
-                </div>
-                <button id="submitCreateRepo">Crear Repositorio</button>
             </div>
 
+
+            <!--
             <div id="addFileForm" class="action-form">
                 <div class="form-group">
                     <label for="fileRepoOwner">Propietario del Repositorio:</label>

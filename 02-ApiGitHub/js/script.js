@@ -1,7 +1,8 @@
 const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
-const token = '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';
+const createRepoForm = document.getElementById("createRepoForm");
+const token = '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';
 
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
@@ -22,29 +23,36 @@ async function buscarRepositorios() {
     const headers = datosAutentication();
     const method = 'GET';
     const endPoint = `https://api.github.com/users/${searchInput.value}/repos`;
+    const queryParams = 'sort=updated&direction=desc&per_page=100';
 
     try{    
         ocultarError();
         mostrarCargando();
         //alert(endPoint);
 
-        //const response = await fetch(endPoint);
-        const response = await fetch(endPoint, 
+        //const response = await fetch(endPoint, 
+        const response = await fetch(`${endPoint}?${queryParams}`,
             {
                 //headers:headers,
                 headers,
                 //method:'GET'
                 method,
             });
-        
+            
+            ocultarCargando();        
         
         if(!response.ok){
-            mostrarError("No fue posible consultarlso repositorios de ese usuario.");
+            if(response.status === 404)
+                mostrarError("Usuario inexistente!");
+            else if (response.status === 401)
+                mostrarError("Error al autenticar!");
+            else
+                mostrarError("No fue posible consultarlso repositorios de ese usuario.");
+            return;
 
         }
         const data = await response.json();
-        //console.log(data);
-        ocultarCargando();
+        //console.log(data);      
         mostarRepositorios(data);
     }catch(error){
         mostrarError(`Se generó un error: ${error.mensaje}`);
@@ -103,4 +111,14 @@ function mostrarCargando(){
 function ocultarCargando() {
     loading.style.display='';
 
+}
+
+//funcion generica
+function cerrarModal(id){
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'none';
+}
+function abrirModal(id){
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'block';
 }

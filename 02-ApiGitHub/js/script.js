@@ -1,20 +1,39 @@
 const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
+const token = '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';
+
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
         buscarRepositorios();
     }
 });
 
+function datosAutentication(){
+    const  headers = new Headers();
+    // bearer  tipo  de autemtication
+    headers.append('Authorization', `bearer ${token}`);
+
+    return headers;
+
+}
+
 async function buscarRepositorios() {
+    const headers = datosAutentication();
+    const method = 'GET';
     const endPoint = `https://api.github.com/users/${searchInput.value}/repos`;
     ocultarError();
     mostrarCargando();
     //alert(endPoint);
 
     //const response = await fetch(endPoint);
-    const response = await fetch(endPoint, {method:'GET'});
+    const response = await fetch(endPoint, 
+        {
+            //headers:headers,
+            headers,
+            //method:'GET'
+            method,
+        });
     
     
     if(!response.ok){
@@ -26,6 +45,7 @@ async function buscarRepositorios() {
     ocultarCargando();
     mostarRepositorios(data);
 }
+
 function mostarRepositorios(repos){
     const reposContainer = document.getElementById('reposContainer');
     if(repos.length === 0){

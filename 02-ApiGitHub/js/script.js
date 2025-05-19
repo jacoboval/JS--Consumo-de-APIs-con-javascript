@@ -1,7 +1,7 @@
 const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
-const token = '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';
+const token = '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';
 
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
@@ -22,28 +22,31 @@ async function buscarRepositorios() {
     const headers = datosAutentication();
     const method = 'GET';
     const endPoint = `https://api.github.com/users/${searchInput.value}/repos`;
-    ocultarError();
-    mostrarCargando();
-    //alert(endPoint);
 
-    //const response = await fetch(endPoint);
-    const response = await fetch(endPoint, 
-        {
-            //headers:headers,
-            headers,
-            //method:'GET'
-            method,
-        });
-    
-    
-    if(!response.ok){
-        mostrarError("No fue posible consultarlso repositorios de ese usuario.");
+   
+        ocultarError();
+        mostrarCargando();
+        //alert(endPoint);
 
+        //const response = await fetch(endPoint);
+        const response = await fetch(endPoint, 
+            {
+                //headers:headers,
+                headers,
+                //method:'GET'
+                method,
+            });
+        
+        
+        if(!response.ok){
+            mostrarError("No fue posible consultarlso repositorios de ese usuario.");
+
+        }
+        const data = await response.json();
+        //console.log(data);
+        ocultarCargando();
+        mostarRepositorios(data);
     }
-    const data = await response.json();
-    //console.log(data);
-    ocultarCargando();
-    mostarRepositorios(data);
 }
 
 function mostarRepositorios(repos){

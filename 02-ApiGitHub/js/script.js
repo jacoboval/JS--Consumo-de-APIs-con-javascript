@@ -23,7 +23,7 @@ async function buscarRepositorios() {
     const method = 'GET';
     const endPoint = `https://api.github.com/users/${searchInput.value}/repos`;
 
-   
+    try{    
         ocultarError();
         mostrarCargando();
         //alert(endPoint);
@@ -46,6 +46,8 @@ async function buscarRepositorios() {
         //console.log(data);
         ocultarCargando();
         mostarRepositorios(data);
+    }catch(error){
+        mostrarError(`Se generó un error: ${error.mensaje}`);
     }
 }
 

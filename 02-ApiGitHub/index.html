@@ -44,10 +44,10 @@
 
     -->
 
-        <div class="actions-container">
+        <div  id="acciones" class="actions-container action-form">
             <h3>Acciones de GitHub</h3>
             <div class="action-buttons">
-                <button id="createRepoBtn" type="button"onclick="abrirModal('createRepoForm');">Crear Repositorio</button>
+                <button id="createRepoBtn" type="button"onclick="mostrarElemento('createRepoForm');">Crear Repositorio</button>
                <!-- 
                 <button id="addFileBtn">Agregar Archivo</button>
                 <button id="deleteFileBtn">Eliminar Archivo</button>
@@ -57,7 +57,7 @@
            <div id="createRepoForm" class="action-form modal">
                 <div class="modal-content">   
                     <div>
-                        <span class="close" onclick="cerrarModal('createRepoForm')">&times;</span>
+                        <span class="close" onclick="ocultarElemento('createRepoForm')">&times;</span>
                         <div class="form-group">
                             <label for="newRepoName">Nombre del Repositorio:</label>
                             <input type="text" id="newRepoName" placeholder="mi-nuevo-repo">
@@ -73,7 +73,7 @@
                                 <option value="true">Privado</option>
                             </select>
                         </div>
-                        <button id="submitCreateRepo">Crear Repositorio</button>
+                        <button id="submitCreateRepo" type="button" onclick="crearRepositorio();">Crear Repositorio</button>
                     </div>
                 </div>
             </div>

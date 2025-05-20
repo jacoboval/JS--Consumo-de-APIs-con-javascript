@@ -2,7 +2,7 @@ const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
 const createRepoForm = document.getElementById("createRepoForm");
-const token = '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';
+const token = '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';
 
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
@@ -54,6 +54,7 @@ async function buscarRepositorios() {
         const data = await response.json();
         //console.log(data);      
         mostarRepositorios(data);
+        mostrarElemento('acciones');
     }catch(error){
         mostrarError(`Se generó un error: ${error.mensaje}`);
     }
@@ -114,11 +115,44 @@ function ocultarCargando() {
 }
 
 //funcion generica
-function cerrarModal(id){
+function ocultarElemento(id){
     const elemento = document.getElementById(id);
     elemento.style.display = 'none';
 }
-function abrirModal(id){
+function mostrarElemento(id){
     const elemento = document.getElementById(id);
     elemento.style.display = 'block';
+}
+
+async function crearRepositorio(){
+    const newRepoName = document.getElementById('newRepoName');
+    const newRepoDesc = document.querySelector('#newRepoDesc');
+    const newRepoPrivate = document.getElementById('newRepoPrivate');
+    const endPoint = 'https://api.github.com/user/repos';
+    const method = 'POST';
+    const headers = datosAutentication();
+
+    if (newRepoName !== '') {
+        const data = {
+            name: newRepoName.value,
+            description: newRepoDesc.value,
+            private: newRepoPrivate.value === 'true' ? true : false
+        }
+        const response = await fetch(`${endPoint}`,
+            {
+                headers,
+                method,
+                body: JSON.stringify(data)
+            });
+
+        if (!response.ok) {
+            mostrarError("No fue posible crear el repositorio");
+        }
+        newRepoName.value = '';        
+        newRepoDesc.value = '';
+        newRepoPrivate.value = 'false';
+        ocultarElemento('createRepoForm');
+               
+        await buscarRepositorios();
+    }
 }

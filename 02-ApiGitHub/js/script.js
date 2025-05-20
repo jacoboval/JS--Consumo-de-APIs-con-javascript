@@ -2,8 +2,10 @@ const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
 const createRepoForm = document.getElementById("createRepoForm");
-const token = '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';
-const repoActual = '';
+const token = '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';
+
+//  se usa let para quse se pueda actualizar el valor
+let repoActual = '';
 
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
@@ -102,6 +104,18 @@ function mostarRepositorios(repos){
     });   
 }
 
+function mostrarConfirmacion(mensaje) {
+    const successMessage = document.getElementById('successMessage');    
+    successMessage.textContent = mensaje;
+    successMessage.style.display = 'block';
+}
+
+function ocultarConfirmacion(){
+    const succesMessage = document.getElementById('succesMessage');
+    succesMessage.style.display = 'none';
+
+}
+
 function mostrarError(mensaje){
     //const errorMessage = document.getElementById('errorMessage');
     errorMessage.textContent = mensaje;
@@ -163,8 +177,38 @@ async function crearRepositorio(){
     }
 }
 async function agregarArchivoRepo(){
-    const endPoint = `https://api.github.com/user/repos${searchInput.value}/${repoActual}/contents/${path}`;
-    const method = 'PUT';
-    const headers = datosAutentication();
+    const path = document.getElementById('filePath');
+    if(path !== ''){
+        const endPoint = `https://api.github.com/repos/${searchInput.value}/${repoActual}/contents/${path.value}`;
+        const method = 'PUT';
+        const headers = datosAutentication();
+        const fileContent = document.getElementById('fileContent');
+        const fileCommitMsg = document.getElementById('fileCommitMsg');
 
+        const data = {
+            message: fileCommitMsg.value,
+            content: btoa(unescape(encodeURIComponent(fileContent.value)))
+        };
+
+        
+        //https://developer.mozilla.org/es/docs/Web/API/Window/atob
+
+        const response = await fetch(`${endPoint}`,
+            {
+                headers,
+                method,
+                body: JSON.stringify(data)
+            });
+
+        if (!response.ok) {
+            mostrarError("No fue posible agregar al archivo al repositorio.");
+        }
+        mostrarConfirmacion('Archivo subido exitosamente.');
+        path.value = '';        
+        fileContent.value = '';
+        fileCommitMsg.value = '';        
+
+        ocultarElemento('addFileForm');
+    }
 }
+

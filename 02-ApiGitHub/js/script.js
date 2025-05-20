@@ -2,7 +2,8 @@ const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
 const createRepoForm = document.getElementById("createRepoForm");
-const token = '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';
+const token = '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';
+const repoActual = '';
 
 searchInput.addEventListener('keypress',(event) => {
     if (event.key === 'Enter'){
@@ -22,6 +23,8 @@ function datosAutentication(){
 async function buscarRepositorios() {
     const headers = datosAutentication();
     const method = 'GET';
+
+    // searchInput.value  -->  owner
     const endPoint = `https://api.github.com/users/${searchInput.value}/repos`;
     const queryParams = 'sort=updated&direction=desc&per_page=100';
 
@@ -90,6 +93,9 @@ function mostarRepositorios(repos){
                     ${repo.language || 'N/A'}
                 </div>
             </div>
+            <div>
+                <button type="button" class="addButton" onclick="mostrarElemento('addFileForm'); repoActual='${repo.name}'">Agregar Archivo</button>       
+            </div>
 
         `;
         reposContainer.appendChild(repoCard);
@@ -155,4 +161,10 @@ async function crearRepositorio(){
                
         await buscarRepositorios();
     }
+}
+async function agregarArchivoRepo(){
+    const endPoint = `https://api.github.com/user/repos${searchInput.value}/${repoActual}/contents/${path}`;
+    const method = 'PUT';
+    const headers = datosAutentication();
+
 }

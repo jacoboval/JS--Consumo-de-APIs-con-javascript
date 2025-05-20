@@ -48,8 +48,9 @@
             <h3>Acciones de GitHub</h3>
             <div class="action-buttons">
                 <button id="createRepoBtn" type="button"onclick="mostrarElemento('createRepoForm');">Crear Repositorio</button>
-               <!-- 
-                <button id="addFileBtn">Agregar Archivo</button>
+              
+                
+            <!-- 
                 <button id="deleteFileBtn">Eliminar Archivo</button>
             -->
             </div>
@@ -79,31 +80,29 @@
             </div>
 
 
-            <!--
-            <div id="addFileForm" class="action-form">
-                <div class="form-group">
-                    <label for="fileRepoOwner">Propietario del Repositorio:</label>
-                    <input type="text" id="fileRepoOwner" placeholder="nombre-usuario">
-                </div>
-                <div class="form-group">
-                    <label for="fileRepoName">Nombre del Repositorio:</label>
-                    <input type="text" id="fileRepoName" placeholder="nombre-repo">
-                </div>
-                <div class="form-group">
-                    <label for="filePath">Ruta del Archivo:</label>
-                    <input type="text" id="filePath" placeholder="README.md">
-                </div>
-                <div class="form-group">
-                    <label for="fileContent">Contenido:</label>
-                    <textarea id="fileContent" placeholder="# Mi Repositorio" rows="5"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="fileCommitMsg">Mensaje de Commit:</label>
-                    <input type="text" id="fileCommitMsg" placeholder="Agregar archivo">
-                </div>
-                <button id="submitAddFile">Agregar Archivo</button>
+            
+            <div id="addFileForm" class="action-form modal">
+                <div class="modal-content">
+                    <div>
+                        <span class="close" onclick="ocultarElemento('addFileForm')">&times;</span>
+                       
+                        <div class="form-group">
+                            <label for="filePath">Ruta del Archivo:</label>
+                            <input type="text" id="filePath" placeholder="README.md">
+                        </div>
+                        <div class="form-group">
+                            <label for="fileContent">Contenido:</label>
+                            <textarea id="fileContent" placeholder="# Mi Repositorio" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fileCommitMsg">Mensaje de Commit:</label>
+                            <input type="text" id="fileCommitMsg" placeholder="Agregar archivo">
+                        </div>
+                        <button id="submitAddFile" type="button" onclick="agregarArchivoRepo();">Agregar Archivo</button>
+                    </div>
+                </div>    
             </div>
-
+            <!--
             <div id="deleteFileForm" class="action-form">
                 <div class="form-group">
                     <label for="delRepoOwner">Propietario del Repositorio:</label>

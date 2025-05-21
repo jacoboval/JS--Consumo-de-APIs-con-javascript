@@ -190,8 +190,8 @@ async function agregarArchivoRepo(){
             message: fileCommitMsg.value,
             content: btoa(unescape(encodeURIComponent(fileContent.value)))
         };
-        //https://developer.mozilla.org/es/docs/Web/API/Window/atob
         
+        //https://developer.mozilla.org/es/docs/Web/API/Window/atob
        
 
         const response = await fetch(`${endPoint}`,

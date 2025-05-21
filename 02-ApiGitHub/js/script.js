@@ -2,7 +2,7 @@ const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
 const createRepoForm = document.getElementById("createRepoForm");
-const token = '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';
+const token = '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';
 
 //  se usa let para quse se pueda actualizar el valor
 let repoActual = '';
@@ -203,6 +203,7 @@ async function agregarArchivoRepo(){
 
         if (!response.ok) {
             mostrarError("No fue posible agregar al archivo al repositorio.");
+            return;
         }
         mostrarConfirmacion('Archivo subido exitosamente.');
         path.value = '';        
@@ -212,18 +213,37 @@ async function agregarArchivoRepo(){
         ocultarElemento('addFileForm');
     }
 }
+
+async function obtenerSHAArchivoRepositorio(path) {
+    if (path !== '') {
+        const endPoint = `https://api.github.com/repos/${searchInput.value}/${repoActual}/contents/${path}`;     
+        const headers = datosAutentication();
+
+        const response = await fetch(`${endPoint}`,
+            {
+                headers
+            });
+            if(!response.ok){
+                return false;
+            }
+
+            const data = await response.json();
+            return data['sha'];
+    }    
+}
 async function borrarArchivoRepositorio(params) {
-    const path = document.getElementById('filePath');
+    const path = document.getElementById('delFilePath');
     if (path !== '') {
         const endPoint = `https://api.github.com/repos/${searchInput.value}/${repoActual}/contents/${path.value}`;
         const method = 'DELETE';
         const headers = datosAutentication();
         
-        const fileCommitMsg = document.getElementById('fileCommitMsg');
+        const delCommitMsg = document.getElementById('delCommitMsg');
+        const sha = await obtenerSHAArchivoRepositorio(path.value);
 
         const data = {
-            message: fileCommitMsg.value,
-            //sha: ''
+            message: delCommitMsg.value,
+            sha
         };
 
         const response = await fetch(`${endPoint}`,
@@ -232,6 +252,16 @@ async function borrarArchivoRepositorio(params) {
                 method,
                 body: JSON.stringify(data)
             });
+
+        if(!response){
+            mostrarError("No se pudo borrar el archivo.");
+            return;
+        }
+        mostrarConfirmacion("Archivo borrado con éxito.");
+        
+        path.value='';
+        delCommitMsg.value = '';
+        ocultarElemento('deleteFileForm');
             
     }   
     

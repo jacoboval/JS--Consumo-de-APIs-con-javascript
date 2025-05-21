@@ -57,6 +57,12 @@ button:hover {
     background-color: #0366d6;
 }
 
+.deleteButton {
+    font-size: 12px;
+    padding: 10px 16px;
+    background-color: #cf222e;
+}
+
 .refresh-btn {
     background-color: #0366d6;
 }

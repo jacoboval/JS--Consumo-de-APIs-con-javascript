@@ -163,3 +163,33 @@ Validamos que todos los valores estén correctos. No tenemos un mensaje de confi
 Cuando el archivo se crea correctamente, mostramos la confirmación con el mensaje "Archivo subido exitosamente". Limpiamos y cerramos la operación. Buscamos nuestro archivo en el dispositivo, agregamos un archivo README.md con el mensaje "este es un archivo subido desde la API" y "prueba put". Al agregar el archivo, todo se agregó correctamente, pero el mensaje no apareció. Corregimos el error y verificamos que todo funcione.
 
 Finalmente, creamos otro archivo index.html con el mensaje "este es un archivo de put" y "otro commit". Al agregar el archivo, todo funciona correctamente. Hemos completado la carga de archivos a través del método PUT. Ahora, nos queda el método DELETE. ¡Vamos a ello!
+
+- habilitando el borado de Archivos
+
+Llegó el momento de completar el CRUD que hemos estado desarrollando. Ya hemos creado, leído y actualizado. Nos falta la D de delete (borrar). Según la hoja de ruta de pantalla, utilizaremos el método DELETE de la API REST para eliminar archivos de ese repositorio, indicando la ruta del archivo y que deseamos borrarlo.
+
+Para ello, consultaremos la documentación de la API de GitHub. Allí veremos que existe la posibilidad de eliminar archivos, y el proceso es bastante similar al caso anterior. Aprovecharemos lo que hemos hecho previamente, cambiando prácticamente solo el método.
+
+Procedamos a ello. En nuestro código, no descomentaremos nada. Intentaremos hacerlo en el DOM. Donde teníamos una acción de delete, eliminamos ese código. Lo llamaremos así. Copiamos esto y lo llamaremos ahora en el DOM, como hicimos en el caso del PUT, para saber en qué repositorio queremos aplicar el método. Con el método de agregar archivo, pudimos determinar qué archivo queríamos agregar. Con el de borrar, también podremos usar la variable repoActual desde ese botón.
+
+Lo primero que haremos es agregar el botón. Así como tenemos este elemento aquí, lo colocaremos aquí. Le daremos un estilo, especificando que sea un display flex, para que los elementos aparezcan uno al lado del otro. Flexbox es un tema que en Alura tenemos bastante material para que puedan dominarlo si necesitan un refuerzo.
+
+¿Qué elemento mostraremos? Vamos al index, donde tenemos algunas cosas comentadas por descomentar, como el deleteFileForm. Descomentamos esto y nuestro código estará listo para funcionar. Casi todo está descomentado, así que estamos avanzando bien. En este caso, también teníamos el propietario y el repositorio, pero no los necesitamos, ya están disponibles. Solo necesitamos la ruta del archivo y el mensaje de commit para poder borrarlo. Si tuviéramos control de todos los archivos del repositorio, podría ser una interfaz completa. Pero aquí, como lo hacemos por la API, colocamos el nombre del archivo.
+
+¿Qué hacemos ahora? Traemos las clases que están aquí y este div que está aquí, y las llevamos allí, agregando el modal. ¿Qué le falta a esto? El close, para que podamos cerrarlo sin problemas. Queremos ocultar este elemento que está aquí. Estamos reutilizando todas las piezas de código. Vamos a ver cómo se comporta. Vamos aquí, buscamos, y... ¡epa! No apareció el botón. ¿Por qué no apareció el botón? Tal vez nos faltó guardar algo aquí. Vamos a verificar.
+
+Aquí eliminamos un elemento. Debería haber desaparecido. Vamos a inspeccionar qué sucede. No aparece el botón de eliminar. Revisemos si hay algo mal cerrado. En la sección de mostrar repositorios, parece que todo está en orden. Verifiquemos nuevamente si hay algún problema de caché. No parece ser un problema de caché. ¿Qué sucede con ese botón que no se muestra? Es interesante este detalle. Revisemos si hay algo mal cerrado. Efectivamente, había algo mal cerrado. Ahora sí, perfecto.
+
+Vamos a cambiar el estilo de ese botón, ya que es muy grande. Vamos a darle un estilo más atractivo rápidamente. Le indicaremos que es un delete button. Tengo algunos colores disponibles, incluyendo un rojo que les dejé. El estilo está bien aquí también, pero aplicaremos los nuevos estilos para ver cómo cambia. Aquí hay un estilo de error que vamos a usar también. Lo aplicamos al botón. Perfecto, ahora se ve mejor.
+
+Sabemos que en este repositorio existe un index.html que queremos eliminar. Al hacerlo, se muestra la ruta y el commit. Ahora queremos aplicar el estilo al index.html para que sea consistente, ya que está apareciendo en verde. La clase delete button es correcta, y queremos que sea de tipo button. Cuando se haga clic en él, queremos que borre el archivo del repositorio. Esto sigue la misma línea de lo que hemos estado haciendo.
+
+Vamos a crear una pequeña función para borrar el archivo del repositorio en el script.js. Será una función async (asíncrona), como ya sabemos. Vamos a copiar y pegar con responsabilidad. ¿Qué haremos aquí? Solicitaremos el path, ya que, según la documentación, necesitamos los mismos contenidos que en el caso anterior, solo que enviamos algunos datos adicionales. El proceso de eliminación es prácticamente igual al de actualización, al PUT. Todo esto se aplica aquí. Lo único que no llamaremos es el file content, porque no lo necesitamos. Este file content lo eliminamos. ¿Cuándo borraremos el archivo? Cuando tengamos el path. Tiene sentido que se comporte de la misma manera, incluso podríamos parametrizar la función para optimizarla más adelante, una vez que tengamos dominio del conocimiento. Es fácil hacerlo.
+
+El método que utilizaremos es DELETE. Completamos el CRUD. El commitMessage se utiliza. Si verificamos el cuerpo que vamos a enviar, solo lleva un message. Perfecto. Ese sha es un stream del archivo que será borrado. Es interesante. ¿Cómo calculamos ese sha? Necesitamos pasárselo. Para calcularlo, realizaremos una operación un poco más compleja, pero no tanto. Vamos a llamar a este response, enviando el método headerBody.
+
+Sabemos que necesitamos armar ese sha, ese data con el sha y el message que nos solicita. Traemos este data y lo armamos hasta aquí, solo que falta el sha por completar. Por ahora, lo dejaremos vacío. Aprovechamos todo lo que pudimos.
+
+Ahora entraremos en terreno nuevo, pero eso lo haremos en el próximo video, en la próxima actividad para completar el proceso. Ya levantamos la interfaz y somos capaces de enviar datos. Nos falta un poco más.
+
+¿Cómo lo resolvemos? Lo veremos en la próxima clase. Cualquier duda, estamos en el foro para ayudar. Estamos finalizando el curso. Recuerden, seguimos avanzando. El curso está muy interesante. Gracias.

@@ -2,7 +2,7 @@ const searchInput = document.querySelector('#searchInput');
 const errorMessage = document.getElementById('errorMessage');
 const loading = document.getElementById('loading');
 const createRepoForm = document.getElementById("createRepoForm");
-const token = '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';
+const token = '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';
 
 //  se usa let para quse se pueda actualizar el valor
 let repoActual = '';
@@ -95,8 +95,9 @@ function mostarRepositorios(repos){
                     ${repo.language || 'N/A'}
                 </div>
             </div>
-            <div>
-                <button type="button" class="addButton" onclick="mostrarElemento('addFileForm'); repoActual='${repo.name}'">Agregar Archivo</button>       
+            <div style="display:flex">
+                <button type="button" class="addButton" onclick="mostrarElemento('addFileForm'); repoActual='${repo.name}'">Agregar Archivo</button>
+                <button type=button class="deleteButton" onclick="mostrarElemento('deleteFileForm');repoActual='${repo.name}'">Eliminar Archivo</button>       
             </div>
 
         `;
@@ -210,5 +211,29 @@ async function agregarArchivoRepo(){
 
         ocultarElemento('addFileForm');
     }
+}
+async function borrarArchivoRepositorio(params) {
+    const path = document.getElementById('filePath');
+    if (path !== '') {
+        const endPoint = `https://api.github.com/repos/${searchInput.value}/${repoActual}/contents/${path.value}`;
+        const method = 'DELETE';
+        const headers = datosAutentication();
+        
+        const fileCommitMsg = document.getElementById('fileCommitMsg');
+
+        const data = {
+            message: fileCommitMsg.value,
+            //sha: ''
+        };
+
+        const response = await fetch(`${endPoint}`,
+            {
+                headers,
+                method,
+                body: JSON.stringify(data)
+            });
+            
+    }   
+    
 }
 

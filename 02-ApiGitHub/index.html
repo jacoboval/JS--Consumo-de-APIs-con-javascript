@@ -48,11 +48,6 @@
             <h3>Acciones de GitHub</h3>
             <div class="action-buttons">
                 <button id="createRepoBtn" type="button"onclick="mostrarElemento('createRepoForm');">Crear Repositorio</button>
-              
-                
-            <!-- 
-                <button id="deleteFileBtn">Eliminar Archivo</button>
-            -->
             </div>
 
            <div id="createRepoForm" class="action-form modal">
@@ -102,28 +97,30 @@
                     </div>
                 </div>    
             </div>
-            <!--
-            <div id="deleteFileForm" class="action-form">
-                <div class="form-group">
-                    <label for="delRepoOwner">Propietario del Repositorio:</label>
-                    <input type="text" id="delRepoOwner" placeholder="nombre-usuario">
-                </div>
-                <div class="form-group">
-                    <label for="delRepoName">Nombre del Repositorio:</label>
-                    <input type="text" id="delRepoName" placeholder="nombre-repo">
-                </div>
-                <div class="form-group">
-                    <label for="delFilePath">Ruta del Archivo:</label>
-                    <input type="text" id="delFilePath" placeholder="README.md">
-                </div>
-                <div class="form-group">
-                    <label for="delCommitMsg">Mensaje de Commit:</label>
-                    <input type="text" id="delCommitMsg" placeholder="Eliminar archivo">
-                </div>
-                <button id="submitDeleteFile">Eliminar Archivo</button>
-            </div>
-        </div>
-        -->
+            
+            <div id="deleteFileForm" class="action-form modal">
+                <div class="modal-content">
+                    <span class="close" onclick="ocultarElemento('deleteFileForm')">&times;</span>
+                        <div class="form-group">
+                            <label for="delRepoOwner">Propietario del Repositorio:</label>
+                            <input type="text" id="delRepoOwner" placeholder="nombre-usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="delRepoName">Nombre del Repositorio:</label>
+                            <input type="text" id="delRepoName" placeholder="nombre-repo">
+                        </div>
+                        <div class="form-group">
+                            <label for="delFilePath">Ruta del Archivo:</label>
+                            <input type="text" id="delFilePath" placeholder="README.md">
+                        </div>
+                        <div class="form-group">
+                            <label for="delCommitMsg">Mensaje de Commit:</label>
+                            <input type="text" id="delCommitMsg" placeholder="Eliminar archivo">
+                        </div>
+                        <button id="submitDeleteFile" class="deleteButton" type="button" onclick="borrarArchivoRepositorio();">Eliminar Archivo</button>
+                    </div>
+                </div>    
+           </div>        
 
         <div id="reposContainer" class="repos-container"></div>
     </div>
